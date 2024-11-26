@@ -53,43 +53,85 @@
       </div>
     </div>
   </nav>
-  <!-- FORMULARIO DE CONTACTO -->
-  <section id="section__contact">
-    <div class="contact__form mt-5">
-      <h1 class="section__title--dark text-center">Contáctanos</h1>
-      <form action="post">
-        <div class="mb-3">
-          <label for="formControlInput" class="form-label">Tu Nombre</label>
-          <input type="text" class="form-control" id="formControlInput" placeholder="Escribe aquí tu nombre" tabindex="0">
+  <!-- ADMINISTRADOR -->
+  <section id="section__admin">
+    <h1 class="section__title--dark text-center my-5">Administración</h1>
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-4">
+          <h4 class="section__subtitle--dark">Doctores disponibles en la Web</h4>
         </div>
-        <div class="mb-3">
-          <label for="formControlInput" class="form-label">Tu Email</label>
-          <input type="email" class="form-control" id="formControlInput" placeholder="Escribe aquí tu email" tabindex="0">
+        <div class="d-flex col-md-4">
+          <input type="text" class="form-control" id="searchDoctor" placeholder="Buscar Médico">
         </div>
-        <div class="mb-3">
-          <label for="formControlInput" class="form-label">Asunto</label>
-          <input type="text" class="form-control" id="formControlInput" placeholder="Escribe aquí tu asunto" tabindex="0">
+        <div class="col-md-4 d-flex justify-content-end">
+          <button class="btn btn-success" data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            + Agregar Médico
+          </button>
         </div>
-        <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label">Mensaje</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" tabindex="0"></textarea>
-        </div>
-        <button type="submit" class="btn btn-success">Enviar</button>
-      </form>
+      </div>
+      <table class="table" id="adminDoctorsTable">
+        <thead>
+          <tr>
+            <th scope="col">ID Médico</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Especialidad</th>
+            <th scope="col">Años de Experiencia</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Aquí se insertarán las filas de doctores -->
+        </tbody>
+      </table>
     </div>
   </section>
-
-  <section id="contact__map" class="w-100 mb-5">
-    <div class="row container-fluid">
-      <div class="col-md-6 col-sm-12 text-center footer__info">
-        <h1 class="section__title--dark">Nuestra Ubicación</h1>
-        <p>Estamos ubicados en la siguiente dirección:</p>
-        <p>Av. Pdte Jorge Alsessandri Rodríguez #123, Talcahuano</p>
+  <!-- MODAL PARA AGREGAR MÉDICO -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo Doctor</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="newDoctorForm">
+            <div class="mb-3">
+              <label for="name" class="form-label section__title--dark">Nombre*</label>
+              <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="mb-3">
+              <label for="specialty" class="form-label section__title--dark">Especialidad*</label>
+              <input type="text" class="form-control" id="specialty" required>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label section__title--dark">Descripción*</label>
+              <textarea class="form-control" id="description" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="image" class="form-label section__title--dark">Imagen*</label>
+              <input type="file" class="form-control" id="image" required>
+            </div>
+            <div class="mb-3">
+              <label for="years_of_experience" class="form-label section__title--dark">Años de Experiencia*</label>
+              <input type="number" class="form-control" id="years_of_experience" required>
+            </div>
+            <div class="mb-3">
+              <label for="days" class="form-label section__title--dark">Días Disponibles (separados por comas)</label>
+              <input type="text" class="form-control" id="days" required>
+            </div>
+            <div class="mb-3">
+              <label for="hours" class="form-label section__title--dark">Horas Disponibles (separadas por comas)</label>
+              <input type="text" class="form-control" id="hours" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="saveDoctorButton">Guardar</button>
+        </div>
       </div>
-      <div class="col-md-6 col-sm-12">
-        <div id="map"></div>
-      </div>
-  </section>
+    </div>
+  </div>
   <!-- FOOTER -->
   <footer>
     <div class="row footer__container">
@@ -135,6 +177,6 @@
     </div>
   </footer>
   <script src="./src/js/bootstrap/bootstrap.bundle.min.js"></script>
-  <script src="./src/js/app.js"></script>
+  <script src="./src/js/admin.js"></script>
 </body>
 </html>
