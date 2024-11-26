@@ -7,6 +7,7 @@ Este proyecto para una página web para una clínica ficticia.
 - Vista Principal (Incluye sección de bienvenida, servicios, testimonios, pie de página)
 - Presentación de Equipo Médico , listado.
 - Página de Contacto (incluye formulario de contacto, mapa de la clínica)
+- Página de Administración
 
 ## Requisitos
 - Navegador Web.
@@ -14,52 +15,57 @@ Este proyecto para una página web para una clínica ficticia.
 ## Ejecución
 1. Clona el repositorio:
   ```bash
-  git clone https://github.com/FernandaAvello/proyecto-clinica3.git
+  git clone https://github.com/FernandaAvello/Laboratorio 1.git
   ```
 2. Navega al directorio del proyecto:
 3. Doble click en archivo `index.html`
 
-## Event Loop
-El event loop en JavaScript es el mecanismo que gestiona la ejecución de tareas, la delegación de eventos y el manejo de operaciones asincrónicas,
-permitiendo que JavaScript sea no bloqueante a pesar de ser un lenguaje de un solo hilo. Para entender cómo funciona,
-es crucial conocer los elementos principales: stack, heap, y queue.
+## Carga de datos desde JSON
 
-## 1. Heap
-El heap es el espacio en memoria donde se almacenan objetos y datos dinámicos.
-JavaScript usa el heap para almacenar variables y estructuras más complejas.
-Es el lugar donde se gestionan las asignaciones de memoria.
+Se utilizan las funciones fetch para cargar los datos de los archivos doctors.json y doctorsNew.json.
+Los datos se convierten a formato JavaScript utilizando response.json().
 
-## 2. Stack (pila de llamadas)
-El stack es una estructura LIFO (Last In, First Out) que se utiliza para ejecutar funciones.
-Cada vez que se llama a una función, se apila en el stack.
-Cuando esa función termina, se "desapila".
+## Visualización de doctores en la página web
 
-## 3. Queue (cola de tareas)
-La queue es una cola FIFO (First In, First Out) que contiene mensajes o tareas pendientes,
-como callbacks de operaciones asincrónicas (por ejemplo, temporizadores, promesas resueltas o eventos de entrada).
+La función listarDoctores recorre el listado de doctores del archivo doctors.json y los muestra en la página web.
+La función showExperienceDoctors filtra los doctores con 5 o más años de experiencia y los muestra en la página web.
 
-## Declaración de Variables
-Variables declaradas con const
-validateEmail y validatePhone: Estas funciones están declaradas en el scope global del archivo, por lo que son accesibles en cualquier parte del script.
-patientFullname: Declarada dentro del evento DOMContentLoaded, por lo que su scope está limitado a esa función.
-Variables declaradas con let:
+## Clonación de un objeto JSON
 
-patientName, patientLastName, patientEmail, patientPhone: Estas variables están declaradas dentro del evento DOMContentLoaded, por lo que su scope está limitado a esa función. No son accesibles fuera de esta función.
+Se crea un objeto doctor con información de un doctor.
+Se clona el objeto utilizando JSON.parse(JSON.stringify(doctor)) para crear un nuevo objeto doctorNewList.
+Se modifican algunas propiedades del objeto clonado.
 
-En resumen, las variables declaradas con let y const dentro de la función del evento DOMContentLoaded tienen un scope limitado a esa función, mientras que las funciones validateEmail y validatePhone tienen un scope global.
+## Merge de objetos JSON
 
-## Uso del Debugger
-Un depurador de JavaScript es una herramienta que permite a los desarrolladores:
--Detener la ejecución del programa en puntos específicos.
--Inspeccionar el estado del programa en ese momento.
--Seguir el flujo de ejecución línea por línea.
--Establecer puntos de interrupción.
--Examinar las variables mientras se ejecuta el código.
+Se cargan los datos de doctors.json y doctorsNew.json.
+Se combinan los dos arreglos de doctores utilizando el operador de propagación (...).
+Se muestra la lista combinada de doctores en la página web.
 
-Para depurar JavaScript, se puede usar la palabra reservada debugger en el código. Esta sentencia especifica la línea exacta donde se
-quiere que se detenga la aplicación web para ser depurada. Para que el script se detenga en la sentencia debugger, se debe tener el Dev Tools abierto y luego recargar la página.
-También se puede usar el comando Ctrl+P Abrir archivo para ubicar el archivo por nombre y comenzar a depurar.
-En Visual Studio Code, se pueden usar las siguientes opciones para depurar JavaScript:
--Run and Debug: Permite ejecutar y depurar el código en diferentes lenguajes de programación, incluyendo JavaScript.
--Javascript Debug Terminal: Permite ejecutar el código JavaScript en una terminal de depuración específica para este lenguaje.
--Debug URL: Permite depurar una URL específica en el proyecto.
+## Visualización y recorrido de doctores en la tabla de administración
+
+La función listarDoctoresAdmin combina los datos de doctors.json y doctorsNew.json y los muestra en una tabla en la página admin.html.
+
+## Estructuras de Datos Arreglos, pilas y colas.
+El código proporcionado implementa dos estructuras de datos clásicas: una pila (Stack) y una cola (Queue), y las utiliza para gestionar citas clínicas y el orden de llegada de pacientes.
+
+La clase Stack sigue el principio LIFO (Last In, First Out), donde el último elemento en entrar es el primero en salir. El constructor inicializa la pila como un arreglo vacío. El método push agrega una nueva cita a la pila, mientras que el método pop elimina y devuelve la última cita agregada, retornando un mensaje si la pila está vacía. El método peek permite ver la última cita sin eliminarla, y isEmpty verifica si la pila está vacía.
+
+La clase Queue sigue el principio FIFO (First In, First Out), donde el primer elemento en entrar es el primero en salir. Similarmente, el constructor inicializa la cola como un arreglo vacío. El método enqueue agrega una nueva cita al final de la cola, mientras que el método dequeue elimina y devuelve la primera cita, retornando un mensaje si la cola está vacía. El método isEmpty verifica si la cola está vacía.
+
+En el ejemplo, se crean tres objetos de pacientes (paciente1, paciente2, paciente3) y se agregan a una instancia de Stack llamada citasClinicas. Se utiliza el método push para agregar cada paciente a la pila y peek para verificar la última cita agendada. Luego, se crea una instancia de Queue llamada ordenLlegadaPacientes y se transfieren todas las citas de la pila a la cola utilizando un bucle while y los métodos pop y enqueue. Finalmente, se atienden los pacientes en el orden de llegada utilizando otro bucle while y el método dequeue, imprimiendo el nombre del paciente atendido.
+
+## Algoritmo de Búsqueda Lineal
+
+El algoritmo de búsqueda de un doctor en la tabla de admin.html tiene una complejidad temporal de O(m * k), donde m es el número de filas en la tabla y k es la longitud promedio de los nombres de los doctores. Esto se debe a que el algoritmo itera sobre cada fila de la tabla y convierte los nombres de los doctores a minúsculas para compararlos con el valor de búsqueda, también convertido a minúsculas. La complejidad ciclomática del algoritmo es 3, lo que indica que hay 3 caminos independientes a través del código, reflejando la presencia de un condicional para verificar la existencia del campo de búsqueda, un bucle para iterar sobre las filas de la tabla y otro condicional dentro del bucle para mostrar u ocultar las filas según el valor de búsqueda. Esta métrica sugiere que el código es relativamente simple y fácil de mantener.
+
+
+## Algoritmo de Ordenamiento QuickSort
+
+La función orderDoctorsByExperience implementa el algoritmo de ordenamiento quicksort para ordenar una lista de doctores según sus años de experiencia. El quicksort es un algoritmo de ordenamiento eficiente que utiliza el enfoque de "divide y vencerás".
+
+Primero, la función verifica si la longitud de la lista de doctores es menor o igual a 1. Si es así, simplemente devuelve la lista, ya que una lista con un solo elemento o vacía ya está ordenada. Luego, selecciona el último elemento de la lista como el "pivote" y lo almacena en la variable pivot.
+
+A continuación, la función divide la lista en dos sublistas: left y right. La sublista left contiene todos los doctores con menos años de experiencia que el pivote, mientras que la sublista right contiene todos los doctores con igual o mayor experiencia que el pivote. Esto se logra iterando sobre la lista de doctores (excepto el último elemento, que es el pivote) y comparando los años de experiencia de cada doctor con el pivote.
+
+Finalmente, la función llama recursivamente a sí misma para ordenar las sublistas left y right, y luego combina las sublistas ordenadas con el pivote en el medio. El resultado es una lista de doctores ordenada por años de experiencia.
